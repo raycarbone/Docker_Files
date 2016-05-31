@@ -1,15 +1,12 @@
-###########################################
-# Dockerfile to build an apache2 image
-###########################################
-# Base image is Ubuntu
-FROM ubuntu:14.04
-# Author: R. Carbone
-MAINTAINER Ray Carbone <raycarbone@gmail.com>
-# Install apache2 package
-RUN apt-get update && \
-     apt-get install -y apache2 && \
-     apt-get clean
-# Set the log directory PATH
-ENV APACHE_LOG_DIR /var/log/apache2
-# Launch apache2 server in the foreground
-ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+#######################################################
+# Dockerfile to build a LOG Volume for Apache2 Service
+#######################################################
+# Base image is BusyBox
+FROM busybox:latest
+# Author: Dr. Peter
+MAINTAINER R. Carbone
+# Create a data volume at /var/log/apache2, which is
+# same as the log directory PATH set for the apache image
+VOLUME /var/log/apache2
+# Execute command true
+CMD ["/bin/true"]
