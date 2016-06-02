@@ -1,12 +1,22 @@
-#######################################################
-# Dockerfile to build a LOG Volume for Apache2 Service
-#######################################################
-# Base image is BusyBox
-FROM busybox:latest
-# Author: Dr. Peter
-MAINTAINER R. Carbone
-# Create a data volume at /var/log/apache2, which is
-# same as the log directory PATH set for the apache image
-VOLUME /var/log/apache2
-# Execute command true
-CMD ["/bin/true"]
+#############################################
+# Dockerfile to build the unittest container
+#############################################
+
+# Base image is python
+FROM python:latest
+
+# Author: R. Carbone
+MAINTAINER Ray Carbone
+
+# Install redis driver for python and the redis mock
+RUN pip install redis && pip install mockredispy
+
+# Copy the test and source to the Docker image
+ADD src/ /src/
+
+# Change the working directory to /src/
+WORKDIR /src/
+
+# Make unittest as the default execution
+ENTRYPOINT python3 -m unittest
+
