@@ -8,4 +8,4 @@ def hit(usr):
 
 # get the hit count for the usr
 def getHit(usr):
-    return (r.get(usr))
+    return (r.get(user))
